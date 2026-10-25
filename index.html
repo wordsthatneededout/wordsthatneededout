@@ -1,104 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Words That Needed Out</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #17120f;
-      color: #f5eee8;
-      text-align: center;
-    }
+<title>Words That Needed Out Studio</title>
 
-    header {
-      padding: 50px 20px 30px;
-      background: #241914;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    h1 {
-      font-size: 38px;
-      margin-bottom: 10px;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #17120f;
+  color: #f5eee8;
+}
 
-    .tagline {
-      font-style: italic;
-      color: #d8b99b;
-      font-size: 18px;
-    }
+header {
+  background: #241914;
+  padding: 34px 20px;
+  text-align: center;
+  border-bottom: 1px solid #59473c;
+}
 
-    main {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 20px;
-    }
+header h1 {
+  margin: 0 0 8px;
+  font-size: 38px;
+}
 
-    .song-card {
-      background: #2a1e18;
-      border: 1px solid #684b3b;
-      border-radius: 18px;
-      padding: 30px;
-      margin-top: 30px;
-    }
+.tagline {
+  color: #d8b99b;
+  font-size: 17px;
+  font-style: italic;
+}
 
-    h2 {
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
+.studio-label {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 8px 16px;
+  border: 1px solid #8f725d;
+  border-radius: 20px;
+  color: #e7cdb8;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
 
-    audio {
-      width: 100%;
-      margin-top: 25px;
-    }
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 35px 20px 60px;
+}
 
-    .coming-soon {
-      margin-top: 35px;
-      color: #c9a98d;
-    }
+.section {
+  background: #241914;
+  border: 1px solid #59473c;
+  border-radius: 14px;
+  padding: 25px;
+  margin-bottom: 25px;
+}
 
-    footer {
-      margin-top: 60px;
-      padding: 30px;
-      color: #9d8878;
-      font-size: 14px;
-    }
-  </style>
+.section h2 {
+  margin-top: 0;
+  color: #e7cdb8;
+}
+
+.section p {
+  color: #cdbeb4;
+  line-height: 1.6;
+}
+
+.song-box {
+  background: #17120f;
+  border: 1px solid #59473c;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.song-title {
+  font-size: 24px;
+  margin: 0 0 5px;
+}
+
+.song-subtitle {
+  color: #bca99d;
+  margin-bottom: 15px;
+}
+
+audio {
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #e7cdb8;
+  font-weight: bold;
+}
+
+select,
+input[type="file"] {
+  width: 100%;
+  padding: 13px;
+  border-radius: 8px;
+  border: 1px solid #6b5548;
+  background: #17120f;
+  color: #f5eee8;
+  margin-bottom: 20px;
+}
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.choice {
+  background: #17120f;
+  border: 1px solid #59473c;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.choice:hover {
+  border-color: #c29a7a;
+}
+
+.choice.selected {
+  border-color: #d8b99b;
+  background: #30231d;
+}
+
+.choice input {
+  display: none;
+}
+
+.choice-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.choice-description {
+  font-size: 13px;
+  color: #bca99d;
+}
+
+.create-area {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.create-button {
+  background: #9b7355;
+  color: white;
+  border: none;
+  padding: 16px 35px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background: #b58a68;
+}
+
+.status {
+  display: none;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background: #30231d;
+  border: 1px solid #59473c;
+  color: #e7cdb8;
+}
+
+.private-note {
+  text-align: center;
+  color: #9f8c80;
+  font-size: 13px;
+  margin-top: 30px;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #8f7c70;
+  font-size: 13px;
+  border-top: 1px solid #59473c;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 30px;
+  }
+
+  .choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding: 25px 15px 45px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Words That Needed Out</h1>
-    <div class="tagline">
-      When the words aren't there, we write the song.
-    </div>
-  </header>
+<header>
 
-  <main>
+  <h1>Words That Needed Out</h1>
 
-    <div class="song-card">
-      <h2>Still Here</h2>
+  <div class="tagline">
+    When the words aren't there, we write the song.
+  </div>
 
-      <p>A song from Words That Needed Out</p>
+  <div class="studio-label">
+    WORDS THAT NEEDED OUT STUDIO
+  </div>
+
+</header>
+
+<main>
+
+  <section class="section">
+
+    <h2>🎵 Choose Your Song</h2>
+
+    <div class="song-box">
+
+      <div class="song-title">
+        Still Here
+      </div>
+
+      <div class="song-subtitle">
+        A song from Words That Needed Out
+      </div>
 
       <audio controls>
-        <source src="songs/still%20here.mp3" type="audio/mpeg">
+        <source src="still%20here.mp3" type="audio/mpeg">
         Your browser does not support audio playback.
       </audio>
+
     </div>
 
-    <div class="coming-soon">
-      More songs coming soon...
+  </section>
+
+
+  <section class="section">
+
+    <h2>🎬 Create Your Video</h2>
+
+    <p>
+      Choose how you want your video made.
+      These choices will become the simple controls for the
+      Words That Needed Out Studio.
+    </p>
+
+
+    <label>Video Length</label>
+
+    <div class="choice-grid">
+
+      <label class="choice">
+        <input type="radio" name="length" value="30">
+        <div class="choice-title">30 Seconds</div>
+        <div class="choice-description">Short clip</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="length" value="60">
+        <div class="choice-title">60 Seconds</div>
+        <div class="choice-description">Short-form video</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="length" value="90">
+        <div class="choice-title">90 Seconds</div>
+        <div class="choice-description">Longer clip</div>
+      </label>
+
+      <label class="choice selected">
+        <input type="radio" name="length" value="full" checked>
+        <div class="choice-title">Full Song</div>
+        <div class="choice-description">Complete music video</div>
+      </label>
+
     </div>
 
-  </main>
+  </section>
 
-  <footer>
-    © 2026 Words That Needed Out
-  </footer>
+
+  <section class="section">
+
+    <h2>📱 Where Are You Posting?</h2>
+
+    <div class="choice-grid">
+
+      <label class="choice">
+        <input type="radio" name="platform" value="youtube">
+        <div class="choice-title">YouTube</div>
+        <div class="choice-description">Full-size video</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="platform" value="shorts">
+        <div class="choice-title">YouTube Shorts</div>
+        <div class="choice-description">Vertical short</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="platform" value="tiktok">
+        <div class="choice-title">TikTok</div>
+        <div class="choice-description">Vertical video</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="platform" value="facebook">
+        <div class="choice-title">Facebook Reels</div>
+        <div class="choice-description">Vertical reel</div>
+      </label>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <h2>📐 Video Shape</h2>
+
+    <div class="choice-grid">
+
+      <label class="choice selected">
+        <input type="radio" name="format" value="vertical" checked>
+        <div class="choice-title">Vertical</div>
+        <div class="choice-description">9:16 — Shorts, TikTok, Reels</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="format" value="square">
+        <div class="choice-title">Square</div>
+        <div class="choice-description">1:1 — Social posts</div>
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="format" value="landscape">
+        <div class="choice-title">Landscape</div>
+        <div class="choice-description">16:9 — YouTube</div>
+      </label>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <h2>✨ Video Style</h2>
+
+    <label for="style">
+      Choose the type of video
+    </label>
+
+    <select id="style">
+
+      <option value="ai">
+        AI Music Video
+      </option>
+
+      <option value="photos">
+        Photo-Based Video
+      </option>
+
+      <option value="lyrics">
+        Lyrics Video
+      </option>
+
+      <option value="mixed">
+        Photos + AI Scenes
+      </option>
+
+    </select>
+
+
+    <label for="photos">
+      Optional: Add Photos
+    </label>
+
+    <input
+      type="file"
+      id="photos"
+      accept="image/*"
+      multiple
+    >
+
+  </section>
+
+
+  <section class="section create-area">
+
+    <h2>🎥 Ready to Create?</h2>
+
+    <p>
+      Your selections will stay in this studio while we build
+      the video-making engine.
+    </p>
+
+    <button
+      class="create-button"
+      onclick="createVideo()"
+    >
+      CREATE VIDEO
+    </button>
+
+    <div id="status" class="status"></div>
+
+  </section>
+
+
+  <div class="private-note">
+    Your studio is being designed as a private workspace.
+    Publishing will be something YOU choose.
+  </div>
+
+</main>
+
+
+<footer>
+  © 2026 Words That Needed Out
+</footer>
+
+
+<script>
+
+const choices = document.querySelectorAll(".choice");
+
+choices.forEach(choice => {
+
+  choice.addEventListener("click", () => {
+
+    const input = choice.querySelector("input");
+
+    if (!input) return;
+
+    const group = input.name;
+
+    document
+      .querySelectorAll('input[name="' + group + '"]')
+      .forEach(item => {
+
+        item.closest(".choice").classList.remove("selected");
+
+      });
+
+    choice.classList.add("selected");
+
+    input.checked = true;
+
+  });
+
+});
+
+
+function createVideo() {
+
+  const length =
+    document.querySelector('input[name="length"]:checked')?.value;
+
+  const platform =
+    document.querySelector('input[name="platform"]:checked')?.value;
+
+  const format =
+    document.querySelector('input[name="format"]:checked')?.value;
+
+  const style =
+    document.getElementById("style").value;
+
+  const status =
+    document.getElementById("status");
+
+
+  status.style.display = "block";
+
+  status.innerHTML =
+    "<strong>Studio settings saved.</strong><br><br>" +
+
+    "Length: " + length + "<br>" +
+
+    "Platform: " + (platform || "Not selected") + "<br>" +
+
+    "Format: " + format + "<br>" +
+
+    "Style: " + style + "<br><br>" +
+
+    "The AI video engine is the next connection we will add. " +
+
+    "Nothing is being published automatically.";
+
+}
+
+</script>
 
 </body>
 </html>
