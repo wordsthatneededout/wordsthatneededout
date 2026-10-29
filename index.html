@@ -449,6 +449,18 @@ footer {
     <audio id="song-audio" controls style="width:100%; margin-top:16px; display:none;"></audio>
     <p id="song-file-name">No song selected yet.</p>
   </div>
+  
+<div id="waveform-panel" style="margin-top:18px; padding:14px; background:#20232e; border:1px solid #59473c; border-radius:12px; display:none;">
+  <h3 style="margin-top:0;">🎵 Your Song Timeline</h3>
+  <p style="font-size:14px; color:#d8b99b;">Your selected section will be highlighted below.</p>
+  <canvas id="song-waveform" width="900" height="120" style="width:100%; height:120px; display:block;"></canvas>
+  <div style="display:flex; justify-content:space-between; font-size:12px; margin-top:6px;">
+    <span id="wave-start-label">0:00</span>
+    <span id="wave-selection-label">Selected section</span>
+    <span id="wave-end-label">Song end</span>
+  </div>
+</div>
+
 
   <div id="manual-selection" style="display:none;">
     <label for="clip-start">Start time (seconds)</label>
@@ -524,7 +536,21 @@ function createVideo() {
   const status =
     document.getElementById("status");
 
+const selectedSong = document.getElementById("preview-song").files[0];
+const startTime = Number(document.getElementById("clip-start").value);
+const endTime = Number(document.getElementById("clip-end").value);
+const highlightChoice = document.querySelector('input[name="highlight"]:checked')?.value || "auto";
+ if (!selectedSong) {
+    status.style.display = "block";
+    status.textContent = "Please choose your song in Preview & Choose Your Song Section first.";
+    return;
+}
 
+if (startTime < 0 || endTime <= startTime) {
+    status.style.display = "block";
+    status.textContent = "Please choose valid start and end times for your song.";
+    return;
+}
   status.style.display = "block";
 
   status.innerHTML =
@@ -537,6 +563,10 @@ function createVideo() {
     "Format: " + format + "<br>" +
 
     "Style: " + style + "<br><br>" +
+    "Song: " + selectedSong.name + "<br>" +
+"Selected clip: " + startTime + "s - " + endTime + "s<br>" +
+"Clip length: " + (endTime - startTime) + " seconds<br>" +
+"Section choice: " + (highlightChoice === "auto" ? "Let Studio Find the Best Part" : "Let Me Choose") + "<br><br>" +
 
     "The AI video engine is the next connection we will add. " +
 
@@ -631,6 +661,79 @@ songAudio.addEventListener("timeupdate", function () {
     clipPreviewEnd = null;
   }
 });
+
+  
+const waveformCanvas = document.getElementById("song-waveform");
+const waveformPanel = document.getElementById("waveform-panel");
+const waveStartLabel = document.getElementById("wave-start-label");
+const waveEndLabel = document.getElementById("wave-end-label");
+const waveSelectionLabel = document.getElementById("wave-selection-label");
+
+function drawSongWaveform() {
+  if (!waveformCanvas || !songAudio || !Number.isFinite(songAudio.duration)) {
+    return;
+  }
+
+  const canvas = waveformCanvas;
+  const ctx = canvas.getContext("2d");
+  const width = canvas.width;
+  const height = canvas.height;
+  const duration = songAudio.duration;
+  const start = Math.max(0, Math.min(Number(clipStart.value) || 0, duration));
+  const end = Math.max(start, Math.min(Number(clipEnd.value) || 0, duration));
+
+  ctx.clearRect(0, 0, width, height);
+
+  const middle = height / 2;
+  const barCount = 120;
+  const gap = 2;
+  const barWidth = (width - gap * (barCount - 1)) / barCount;
+
+  for (let i = 0; i < barCount; i++) {
+    const x = i * (barWidth + gap);
+    const time = (i / barCount) * duration;
+    const selected = time >= start && time <= end;
+    const waveHeight = 8 + Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.37)) * (height * 0.42);
+
+    ctx.fillStyle = selected ? "#d8b99b" : "#59616e";
+    ctx.fillRect(x, middle - waveHeight / 2, barWidth, waveHeight);
+  }
+
+  waveStartLabel.textContent = "Start: " + start.toFixed(1) + "s";
+  waveEndLabel.textContent = "End: " + end.toFixed(1) + "s";
+  waveSelectionLabel.textContent =
+    "Selected section: " + start.toFixed(1) + "s – " + end.toFixed(1) + "s";
+}
+
+if (waveformCanvas && waveformPanel) {
+  songInput.addEventListener("change", function () {
+    waveformPanel.style.display = "block";
+  });
+
+  songAudio.addEventListener("loadedmetadata", drawSongWaveform);
+  clipStart.addEventListener("input", drawSongWaveform);
+  clipEnd.addEventListener("input", drawSongWaveform);
+
+  waveformCanvas.addEventListener("click", function (event) {
+    if (!Number.isFinite(songAudio.duration) || !songAudio.duration) return;
+
+    const rect = waveformCanvas.getBoundingClientRect();
+    const position = (event.clientX - rect.left) / rect.width;
+    const clickedTime = Math.max(0, Math.min(position, 1)) * songAudio.duration;
+
+    if (clickedTime < Number(clipStart.value)) {
+      clipStart.value = Math.floor(clickedTime);
+    } else {
+      clipEnd.value = Math.max(
+        Number(clipStart.value) + 1,
+        Math.floor(clickedTime)
+      );
+      clipEnd.value = Math.min(Number(clipEnd.value), Math.floor(songAudio.duration));
+    }
+
+    drawSongWaveform();
+  });
+}
 
 </script>
 
