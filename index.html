@@ -629,7 +629,7 @@ async function analyzeSongWaveform(file) {
   songAudio.src = songUrl;
   songAudio.style.display = "block";
   songFileName.textContent = "Selected song: " + file.name;
-    analyzeSongWaveform(file);
+    
 
   songAudio.onloadedmetadata = function () {
     clipStart.max = Math.floor(songAudio.duration);
