@@ -437,6 +437,32 @@ footer {
     Let Me Choose
   </label>
 </section>
+  
+<section class="section" id="song-preview">
+  <h2>🎧 Preview &amp; Choose Your Song Section</h2>
+  <p>Listen to your song and choose the part you want to bring to life in your video.</p>
+
+  <label for="preview-song">Choose an audio file to preview:</label>
+  <input type="file" id="preview-song" accept="audio/*">
+
+  <div id="song-player-area">
+    <audio id="song-audio" controls style="width:100%; margin-top:16px; display:none;"></audio>
+    <p id="song-file-name">No song selected yet.</p>
+  </div>
+
+  <div id="manual-selection" style="display:none;">
+    <label for="clip-start">Start time (seconds)</label>
+    <input type="number" id="clip-start" min="0" value="0" step="1">
+
+    <label for="clip-end">End time (seconds)</label>
+    <input type="number" id="clip-end" min="1" value="30" step="1">
+
+    <p id="clip-duration">Selected clip: 30 seconds</p>
+    <button type="button" id="preview-clip">Preview Selected Section</button>
+    <p id="selection-status">Choose your song and clip times above.</p>
+  </div>
+</section>
+
   <div class="private-note">
     Your studio is being designed as a private workspace.
     Publishing will be something YOU choose.
@@ -517,6 +543,94 @@ function createVideo() {
     "Nothing is being published automatically.";
 
 }
+  
+const songInput = document.getElementById("preview-song");
+const songAudio = document.getElementById("song-audio");
+const songFileName = document.getElementById("song-file-name");
+const manualSelection = document.getElementById("manual-selection");
+const clipStart = document.getElementById("clip-start");
+const clipEnd = document.getElementById("clip-end");
+const clipDuration = document.getElementById("clip-duration");
+const previewClip = document.getElementById("preview-clip");
+const selectionStatus = document.getElementById("selection-status");
+
+let songUrl = null;
+let clipPreviewEnd = null;
+
+songInput.addEventListener("change", function () {
+  const file = songInput.files[0];
+  if (!file) return;
+
+  if (songUrl) URL.revokeObjectURL(songUrl);
+  songUrl = URL.createObjectURL(file);
+
+  songAudio.src = songUrl;
+  songAudio.style.display = "block";
+  songFileName.textContent = "Selected song: " + file.name;
+
+  songAudio.onloadedmetadata = function () {
+    clipStart.max = Math.floor(songAudio.duration);
+    clipEnd.max = Math.floor(songAudio.duration);
+    clipEnd.value = Math.min(30, Math.floor(songAudio.duration));
+    updateClipDuration();
+    selectionStatus.textContent =
+      "Song loaded. Choose your clip times and preview your selection.";
+  };
+});
+
+function updateClipDuration() {
+  const start = Number(clipStart.value);
+  const end = Number(clipEnd.value);
+  const duration = Math.max(0, end - start);
+  clipDuration.textContent = "Selected clip: " + duration + " seconds";
+}
+
+document.querySelectorAll('input[name="highlight"]').forEach(function (option) {
+  option.addEventListener("change", function () {
+    const manual = document.querySelector('input[name="highlight"]:checked').value === "manual";
+    manualSelection.style.display = manual ? "block" : "none";
+
+    if (!manual) {
+      selectionStatus.textContent =
+        "Automatic selection is planned for a future Studio update.";
+    } else {
+      selectionStatus.textContent =
+        "Choose your song and set the start and end times.";
+    }
+  });
+});
+
+clipStart.addEventListener("input", updateClipDuration);
+clipEnd.addEventListener("input", updateClipDuration);
+
+previewClip.addEventListener("click", function () {
+  const start = Number(clipStart.value);
+  const end = Number(clipEnd.value);
+
+  if (!songAudio.src || !Number.isFinite(songAudio.duration)) {
+    selectionStatus.textContent = "Please choose an audio file first.";
+    return;
+  }
+
+  if (start < 0 || end <= start || end > songAudio.duration) {
+    selectionStatus.textContent =
+      "Please enter valid start and end times within your song.";
+    return;
+  }
+
+  songAudio.currentTime = start;
+  clipPreviewEnd = end;
+  songAudio.play();
+  selectionStatus.textContent =
+    "Previewing your selected section: " + start + "–" + end + " seconds.";
+});
+
+songAudio.addEventListener("timeupdate", function () {
+  if (clipPreviewEnd !== null && songAudio.currentTime >= clipPreviewEnd) {
+    songAudio.pause();
+    clipPreviewEnd = null;
+  }
+});
 
 </script>
 
