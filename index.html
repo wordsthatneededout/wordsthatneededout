@@ -732,6 +732,28 @@ function drawSongWaveform() {
     ctx.fillRect(x, middle - waveHeight / 2, barWidth, waveHeight);
   }
 
+  // Draw time markings along the bottom of the waveform
+  const timeMarkInterval = duration <= 180 ? 15 : 30;
+  ctx.font = "10px Arial";
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#d8b99b";
+  ctx.strokeStyle = "#d8b99b";
+
+  for (let markSeconds = 0; markSeconds <= duration; markSeconds += timeMarkInterval) {
+    const markX = (markSeconds / duration) * width;
+    const markMinutes = Math.floor(markSeconds / 60);
+    const markRemainder = Math.floor(markSeconds % 60);
+    const markText = markMinutes + ":" + String(markRemainder).padStart(2, "0");
+
+    ctx.beginPath();
+    ctx.moveTo(markX, height - 20);
+    ctx.lineTo(markX, height - 14);
+    ctx.stroke();
+
+    const labelX = Math.max(16, Math.min(width - 16, markX));
+    ctx.fillText(markText, labelX, height - 3);
+  }
+
   waveStartLabel.textContent = "Start: " + start.toFixed(1) + "s";
   waveEndLabel.textContent = "End: " + end.toFixed(1) + "s";
   waveSelectionLabel.textContent =
