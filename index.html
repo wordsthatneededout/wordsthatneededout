@@ -586,8 +586,40 @@ const selectionStatus = document.getElementById("selection-status");
 
 let songUrl = null;
 let clipPreviewEnd = null;
+  let waveformData = null:
 
-songInput.addEventListener("change", function () {
+async function analyzeSongWaveform(file) {
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const arrayBuffer = await file.arrayBuffer();
+    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+    const channelData = audioBuffer.getChannelData(0);
+    const samplesPerBar = Math.floor(channelData.length / 120);
+    const levels = [];
+
+    for (let i = 0; i < 120; i++) {
+      const start = i * samplesPerBar;
+      const end = Math.min(start + samplesPerBar, channelData.length);
+      let sum = 0;
+
+      for (let j = start; j < end; j++) {
+        sum += channelData[j] * channelData[j];
+      }
+
+      const rms = Math.sqrt(sum / Math.max(1, end - start));
+      levels.push(rms);
+    }
+
+    waveformData = levels;
+    await audioContext.close();
+    drawSongWaveform();
+  } catch (error) {
+    console.error("Could not analyze song waveform:", error);
+    waveformData = null;
+  }
+}
+  songInput.addEventListener("change", function () {
   const file = songInput.files[0];
   if (!file) return;
 
@@ -597,6 +629,7 @@ songInput.addEventListener("change", function () {
   songAudio.src = songUrl;
   songAudio.style.display = "block";
   songFileName.textContent = "Selected song: " + file.name;
+    analyzeSongWaveform(file);
 
   songAudio.onloadedmetadata = function () {
     clipStart.max = Math.floor(songAudio.duration);
@@ -693,8 +726,8 @@ function drawSongWaveform() {
     const x = i * (barWidth + gap);
     const time = (i / barCount) * duration;
     const selected = time >= start && time <= end;
-    const waveHeight = 8 + Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.37)) * (height * 0.42);
-
+  
+    const waveHeight = waveformData && waveformData.length ? 8 + (waveformData[i] / Math.max(...waveformData, 0.001)) * (height * 0.42) : 8 + Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.37)) * (height * 0.42);
     ctx.fillStyle = selected ? "#d8b99b" : "#59616e";
     ctx.fillRect(x, middle - waveHeight / 2, barWidth, waveHeight);
   }
