@@ -540,7 +540,8 @@ function createVideo() {
     document.getElementById("status");
 
 const selectedSong = document.getElementById("preview-song").files[0];
-const startTime = Number(document.getElementById("clip-start").value);
+  const selectedPhotos = Array.from(document.getElementById("photos").files);
+  const startTime = Number(document.getElementById("clip-start").value);
 const endTime = Number(document.getElementById("clip-end").value);
 const highlightChoice = document.querySelector('input[name="highlight"]:checked')?.value || "auto";
  if (!selectedSong) {
