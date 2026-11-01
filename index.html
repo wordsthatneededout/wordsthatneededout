@@ -648,17 +648,71 @@ function updateClipDuration() {
   clipDuration.textContent = "Selected clip: " + duration + " seconds";
 }
 
-document.querySelectorAll('input[name="highlight"]').forEach(function (option) {
-  option.addEventListener("change", function () {
-    const manual = document.querySelector('input[name="highlight"]:checked').value === "manual";
+
+function applyAutomaticSelection() {
+  if (!songAudio.src || !Number.isFinite(songAudio.duration) ||
+      !songAudio.duration || !waveformData) {
+    selectionStatus.textContent =
+      "Please upload your song while automatic selection is enabled.";
+    return;
+  }
+
+  const duration = songAudio.duration;
+  const lengthChoice =
+    document.querySelector('input[name="length"]:checked')?.value;
+
+  const targetLength = lengthChoice === "full"
+    ? duration
+    : Math.min(Number(lengthChoice) || 30, duration);
+
+  let bestStart = 0;
+
+  if (targetLength < duration) {
+    const windowSize = Math.max(
+      1,
+      Math.ceil((targetLength / duration) * waveformData.length)
+    );
+
+    let bestScore = -1;
+
+    for (let i = 0; i <= waveformData.length - windowSize; i++) {
+      const section = waveformData.slice(i, i + windowSize);
+      const score = section.reduce((sum, value) => sum + value, 0)
+        / section.length;
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestStart = i;
+      }
+    }
+
+    bestStart = Math.floor(
+      (bestStart / waveformData.length) * duration
+    );
+  }
+
+  clipStart.value = bestStart;
+  clipEnd.value = Math.min(duration, bestStart + targetLength);
+
+  updateClipDuration();
+  drawSongWaveform();
+
+  selectionStatus.textContent =
+    "Studio selected the strongest audio section. You can change it anytime.";
+}
+
+document.querySelectorAll('input[name="highlight"]').forEach(function(option) {
+  option.addEventListener("change", function() {
+    const manual =
+      document.querySelector('input[name="highlight"]:checked').value === "manual";
+
     manualSelection.style.display = manual ? "block" : "none";
 
-    if (!manual) {
-      selectionStatus.textContent =
-        "Automatic selection is planned for a future Studio update.";
-    } else {
+    if (manual) {
       selectionStatus.textContent =
         "Choose your song and set the start and end times.";
+    } else {
+      applyAutomaticSelection();
     }
   });
 });
