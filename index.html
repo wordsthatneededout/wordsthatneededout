@@ -460,7 +460,10 @@ footer {
     <span id="wave-end-label">Song end</span>
   </div>
 </div>
-
+<div style="margin-top:12px;">
+    <button type="button" id="play-selected-clip">Play Selected Clip</button>
+    <button type="button" id="play-full-song">Play Full Song</button>
+</div>
 
   <div id="manual-selection" style="display:none;">
     <label for="clip-start">Start time (seconds)</label>
@@ -747,6 +750,24 @@ songAudio.addEventListener("timeupdate", function () {
     songAudio.pause();
     clipPreviewEnd = null;
   }
+});
+
+document.getElementById("play-selected-clip").addEventListener("click", function () {
+    previewClip.click();
+});
+
+document.getElementById("play-full-song").addEventListener("click", function () {
+    if (!songAudio.src || !Number.isFinite(songAudio.duration)) {
+        selectionStatus.textContent = "Please choose an audio file first.";
+        return;
+    }
+
+    clipPreviewEnd = null;
+    songAudio.pause();
+    songAudio.currentTime = 0;
+    songAudio.play();
+
+    selectionStatus.textContent = "Playing the full song.";
 });
 
   
