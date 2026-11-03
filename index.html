@@ -866,6 +866,47 @@ if (waveformCanvas && waveformPanel) {
   });
 }
 
+
+// TEMPORARY STUDIO-TO-CLOUDFLARE CONNECTION TEST
+(async function () {
+    const testBox = document.createElement("div");
+
+    testBox.style.padding = "12px";
+    testBox.style.margin = "15px";
+    testBox.style.background = "#382319";
+    testBox.style.color = "#F2D58A";
+    testBox.style.border = "1px solid #D99A35";
+    testBox.style.borderRadius = "8px";
+    testBox.textContent = "Checking Cloudflare connection...";
+
+    document.body.appendChild(testBox);
+
+    try {
+        const response = await fetch(
+            "https://words-that-needed-out-api.wordsthatneededout.workers.dev/health"
+        );
+
+        if (!response.ok) {
+            throw new Error("Worker returned status " + response.status);
+        }
+
+        const result = await response.json();
+
+        if (result.status === "ok") {
+            testBox.textContent =
+                "CONNECTED: Words That Needed Out Studio can reach Cloudflare!";
+        } else {
+            testBox.textContent =
+                "Connection reached, but the health check needs attention.";
+        }
+    } catch (error) {
+        testBox.textContent =
+            "Connection test failed: " + error.message;
+
+        console.error("Cloudflare connection test:", error);
+    }
+})();
+
 </script>
 
 </body>
