@@ -555,27 +555,43 @@ if (startTime < 0 || endTime <= startTime) {
     status.textContent = "Please choose valid start and end times for your song.";
     return;
 }
-  status.style.display = "block";
+ status.style.display = "block";
+status.textContent = "Sending your settings to Cloudflare...";
+  const settingsPayload = {
+    length: length,
+    platform: platform || "",
+    format: format,
+    style: style,
+    highlightChoice: highlightChoice,
+    songName: selectedSong.name,
+    startTime: startTime,
+    endTime: endTime
+};
 
-  status.innerHTML =
-    "<strong>Studio settings saved.</strong><br><br>" +
+fetch("https://words-that-needed-out-api.wordsthatneededout.workers.dev/settings", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(settingsPayload)
+})
+.then(async response => {
+    const result = await response.json();
 
-    "Length: " + length + "<br>" +
+    if (!response.ok) {
+        throw new Error(result.error || "Settings connection failed.");
+    }
 
-    "Platform: " + (platform || "Not selected") + "<br>" +
-
-    "Format: " + format + "<br>" +
-
-    "Style: " + style + "<br><br>" +
-    "Song: " + selectedSong.name + "<br>" +
-"Selected clip: " + startTime + "s - " + endTime + "s<br>" +
-"Clip length: " + (endTime - startTime) + " seconds<br>" +
-"Section choice: " + (highlightChoice === "auto" ? "Let Studio Find the Best Part" : "Let Me Choose") + "<br><br>" +
-
-    "The AI video engine is the next connection we will add. " +
-
-    "Nothing is being published automatically.";
-
+    status.innerHTML =
+        "<strong>Connected to Cloudflare!</strong><br>" +
+        "Your Studio settings were received and validated.<br>" +
+        "No video was generated.";
+})
+.catch(error => {
+    status.innerHTML =
+        "<strong>Connection error:</strong><br>" + error.message;
+});
+  
 }
   
 const songInput = document.getElementById("preview-song");
