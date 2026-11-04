@@ -581,10 +581,18 @@ fetch("https://words-that-needed-out-api.wordsthatneededout.workers.dev/settings
     if (!response.ok) {
         throw new Error(result.error || "Settings connection failed.");
     }
+      const falResponse = await fetch(
+        "https://words-that-needed-out-api.wordsthatneededout.workers.dev/fal-check"
+      );
+      const falCheck = await falResponse.json();
 
-    status.innerHTML =
+      if (!falResponse.ok) {
+        throw new Error(falCheck.message || "FAL check failed.");
+      }
+         status.innerHTML =
         "<strong>Connected to Cloudflare!</strong><br>" +
-        "Your Studio settings were received and validated.<br>" +
+        "Studio settings received and validated.<br>" +
+        "FAL connection: " + falCheck.message + "<br>" +
         "No video was generated.";
 })
 .catch(error => {
