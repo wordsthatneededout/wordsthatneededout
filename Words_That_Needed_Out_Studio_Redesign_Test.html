@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Words That Needed Out Studio</title>
+<style>
+:root{--midnight:#171311;--espresso:#382319;--gold:#D99A27;--amber:#F4B94F;--ivory:#F5E8C8;--copper:#B85F42;--muted:#d7c7ae}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--midnight);color:var(--ivory);font-family:Arial,sans-serif;line-height:1.55}
+a{color:inherit}
+.site-nav{position:sticky;top:0;z-index:20;display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:12px 16px;background:rgba(23,19,17,.97);border-bottom:1px solid var(--gold)}
+.site-nav a{text-decoration:none;color:var(--ivory);font-size:14px;padding:8px 13px;border:1px solid transparent;border-radius:20px}
+.site-nav a:hover,.site-nav a:focus{border-color:var(--gold);color:var(--amber)}
+.hero{min-height:330px;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px 20px;background:linear-gradient(90deg,rgba(15,10,8,.62),rgba(15,10,8,.25),rgba(15,10,8,.62)),url("Sunset%20Lantern%20by%20the%20Lakeside.png") center 52%/cover no-repeat;border-bottom:3px solid var(--gold)}
+.hero-inner{width:min(1100px,100%);display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;text-shadow:0 2px 8px #000}
+.studio-logo{width:clamp(112px,17vw,178px);height:clamp(112px,17vw,178px);object-fit:contain;filter:drop-shadow(0 4px 10px #000)}
+.hero-copy h1{margin:0;color:#fff1d1;font-family:Georgia,serif;font-size:clamp(30px,5vw,54px);letter-spacing:.5px}
+.hero-copy .tagline{font-family:Georgia,serif;font-style:italic;font-size:clamp(16px,2.2vw,22px);color:var(--ivory);margin:8px 0}
+.hero-copy .brandline{color:var(--amber);font-size:13px;letter-spacing:3px;font-weight:bold}
+main{width:min(980px,100%);margin:0 auto;padding:30px 20px 55px}
+.intro{text-align:center;color:var(--muted);margin:0 auto 24px;max-width:720px}
+.section{background:linear-gradient(145deg,#382319,#241812);border:1px solid rgba(217,154,39,.75);border-radius:15px;padding:24px;margin:0 0 20px;box-shadow:0 8px 22px rgba(0,0,0,.22);scroll-margin-top:78px}
+.section h2{margin:0 0 12px;color:var(--amber);font-family:Georgia,serif;font-size:clamp(20px,3vw,25px)}
+.step-number{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-right:9px;border-radius:50%;background:var(--gold);color:var(--midnight);font:700 15px Arial;vertical-align:middle}
+.section p{color:var(--muted);margin:8px 0 16px}
+label{display:block;margin:10px 0 7px;color:var(--ivory);font-weight:600}
+input[type=file],select,input[type=number]{width:100%;padding:12px;border-radius:8px;border:1px solid #876644;background:#1d1713;color:var(--ivory);margin:5px 0 14px}
+input[type=radio]{accent-color:var(--gold)}
+.choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.choice{display:block;background:#1d1713;border:1px solid #765536;border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:.18s;margin:0}
+.choice:hover{border-color:var(--amber)}.choice.selected{border:2px solid var(--amber);background:#49301e}
+.choice input{margin:0 0 7px;display:inline-block}.choice-title{font-weight:bold;color:var(--ivory)}.choice-description{font-size:13px;color:var(--muted)}
+#song-player-area{margin-top:14px}#song-audio{width:100%;margin-top:12px}#song-file-name{overflow-wrap:anywhere}
+#waveform-panel{background:#211913!important;border-color:var(--gold)!important}#song-waveform{max-width:100%}
+button,.create-button{cursor:pointer;border:1px solid var(--gold);border-radius:8px;background:var(--gold);color:var(--midnight);font-weight:700;padding:11px 16px;margin:6px 6px 6px 0}
+button:hover,.create-button:hover{background:var(--amber)}
+#manual-selection{margin-top:16px;padding:16px;border:1px solid #765536;border-radius:10px;background:#211913}
+.create-area{text-align:center}.create-button{font-size:18px;padding:15px 34px;letter-spacing:.5px}
+.status{display:none;margin-top:18px;padding:15px;border-radius:8px;background:#211913;border:1px solid var(--gold);color:var(--ivory);overflow-wrap:anywhere}
+.private-note{text-align:center;color:#b5a28d;font-size:13px;margin:26px 0 0}
+footer{text-align:center;padding:24px;color:#b5a28d;border-top:1px solid #62472c;font-size:13px;background:#211711}
+@media(max-width:650px){.hero{min-height:280px}.hero-inner{gap:12px}.hero-copy h1{font-size:32px}.site-nav{position:static}.site-nav a{font-size:13px;padding:7px 9px}main{padding:20px 12px 40px}.section{padding:18px}.choice-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+  <a href="#top">Home</a><a href="#create-workspace">Create Video</a><a href="#create-workspace">My Projects</a><a href="#song-step">Song Archive</a><a href="#about-studio">About</a><a href="#about-studio">Community</a>
+</nav>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <img class="studio-logo" src="ChatGPT%20Image%20Nov%2011%2C%202026%2C%2004_04_29%20PM.png" alt="Words That Needed Out Studio circular logo">
+    <div class="hero-copy">
+      <h1>Words That Needed Out Studio</h1>
+      <div class="tagline">Tragedy to Triumph</div>
+      <div class="brandline">REAL LIFE&nbsp; • &nbsp;REAL FEELINGS&nbsp; • &nbsp;REAL SONGS</div>
+      <div class="tagline">When the words aren't there, we write the song.</div>
+    </div>
+  </div>
+</header>
+<main id="create-workspace">
+  <p class="intro">Your story. Your song. Your vision. Create a video one step at a time.</p>
+
+  <section class="section" id="song-step">
+    <h2><span class="step-number">1</span>Choose Your Song</h2>
+    <p>Upload the song you want to bring to life in your video.</p>
+    <label for="preview-song">Choose an audio file:</label>
+    <input type="file" id="preview-song" accept="audio/*">
+    <div id="song-player-area">
+      <audio id="song-audio" controls style="display:none;"></audio>
+      <p id="song-file-name">No song selected yet.</p>
+    </div>
+  </section>
+
+  <section class="section" id="section-step">
+    <h2><span class="step-number">2</span>Choose Your Song Section</h2>
+    <p>Let Studio find a strong section, or choose the exact part yourself. Preview it before moving on.</p>
+    <label><input type="radio" name="highlight" value="auto" checked> Let Studio Find the Best Part</label>
+    <label><input type="radio" name="highlight" value="manual"> Let Me Choose</label>
+    <div id="waveform-panel" style="margin-top:18px;padding:14px;border:1px solid #59473c;border-radius:12px;display:none;">
+      <h3 style="margin-top:0;">Your Song Timeline</h3>
+      <p style="font-size:14px;">Your selected section will be highlighted below.</p>
+      <canvas id="song-waveform" width="900" height="120" style="width:100%;height:120px;display:block;"></canvas>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-top:6px;"><span id="wave-start-label">0:00</span><span id="wave-selection-label">Selected section</span><span id="wave-end-label">Song end</span></div>
+    </div>
+    <div style="margin-top:12px;">
+      <button type="button" id="play-selected-clip">Play Selected Clip</button>
+      <button type="button" id="play-full-song">Play Full Song</button>
+    </div>
+    <div id="manual-selection" style="display:none;">
+      <label for="clip-start">Start time (seconds)</label><input type="number" id="clip-start" min="0" value="0" step="1">
+      <label for="clip-end">End time (seconds)</label><input type="number" id="clip-end" min="1" value="30" step="1">
+      <p id="clip-duration">Selected clip: 30 seconds</p>
+      <button type="button" id="preview-clip">Preview Selected Section</button>
+      <p id="selection-status">Choose your song and clip times above.</p>
+    </div>
+  </section>
+
+  <section class="section" id="length-step">
+    <h2><span class="step-number">3</span>Choose Video Length</h2>
+    <div class="choice-grid">
+      <label class="choice"><input type="radio" name="length" value="30"><div class="choice-title">30 Seconds</div><div class="choice-description">Short clip</div></label>
+      <label class="choice"><input type="radio" name="length" value="60"><div class="choice-title">60 Seconds</div><div class="choice-description">Short-form video</div></label>
+      <label class="choice"><input type="radio" name="length" value="90"><div class="choice-title">90 Seconds</div><div class="choice-description">Longer clip</div></label>
+      <label class="choice selected"><input type="radio" name="length" value="full" checked><div class="choice-title">Full Song</div><div class="choice-description">Complete music video</div></label>
+    </div>
+  </section>
+
+  <section class="section" id="platform-step">
+    <h2><span class="step-number">4</span>Where Are You Posting?</h2>
+    <div class="choice-grid">
+      <label class="choice"><input type="radio" name="platform" value="youtube"><div class="choice-title">YouTube</div><div class="choice-description">Full-size video</div></label>
+      <label class="choice"><input type="radio" name="platform" value="shorts"><div class="choice-title">YouTube Shorts</div><div class="choice-description">Vertical short</div></label>
+      <label class="choice"><input type="radio" name="platform" value="tiktok"><div class="choice-title">TikTok</div><div class="choice-description">Vertical video</div></label>
+      <label class="choice"><input type="radio" name="platform" value="facebook"><div class="choice-title">Facebook Reels</div><div class="choice-description">Vertical reel</div></label>
+    </div>
+  </section>
+
+  <section class="section" id="format-step">
+    <h2><span class="step-number">5</span>Choose Video Shape</h2>
+    <div class="choice-grid">
+      <label class="choice selected"><input type="radio" name="format" value="vertical" checked><div class="choice-title">Vertical</div><div class="choice-description">9:16 — Shorts, TikTok, Reels</div></label>
+      <label class="choice"><input type="radio" name="format" value="square"><div class="choice-title">Square</div><div class="choice-description">1:1 — Social posts</div></label>
+      <label class="choice"><input type="radio" name="format" value="landscape"><div class="choice-title">Landscape</div><div class="choice-description">16:9 — YouTube</div></label>
+    </div>
+  </section>
+
+  <section class="section" id="style-step">
+    <h2><span class="step-number">6</span>Choose Video Style</h2>
+    <label for="style">Choose the type of video</label>
+    <select id="style"><option value="ai">AI Music Video</option><option value="photos">Photo-Based Video</option><option value="lyrics">Lyrics Video</option><option value="mixed">Photos + AI Scenes</option></select>
+    <label for="photos">Optional: Add Photos</label>
+    <input type="file" id="photos" accept="image/*" multiple>
+  </section>
+
+  <section class="section create-area" id="ready-step">
+    <h2><span class="step-number">7</span>Ready to Create?</h2>
+    <p>Review your choices, then start creating your video.</p>
+    <button class="create-button" onclick="createVideo()">CREATE VIDEO</button>
+    <div id="status" class="status"></div>
+  </section>
+  <div class="private-note" id="about-studio">Your studio is being designed as a private workspace. Publishing will be something YOU choose.</div>
+</main>
+<footer>© 2026 Words That Needed Out Studio</footer>
+<script>
+
+const choices = document.querySelectorAll(".choice");
+
+choices.forEach(choice => {
+
+  choice.addEventListener("click", () => {
+
+    const input = choice.querySelector("input");
+
+    if (!input) return;
+
+    const group = input.name;
+
+    document
+      .querySelectorAll('input[name="' + group + '"]')
+      .forEach(item => {
+
+        item.closest(".choice").classList.remove("selected");
+
+      });
+
+    choice.classList.add("selected");
+
+    input.checked = true;
+
+  });
+
+});
+
+
+function createVideo() {
+
+  const length =
+    document.querySelector('input[name="length"]:checked')?.value;
+
+  const platform =
+    document.querySelector('input[name="platform"]:checked')?.value;
+
+  const format =
+    document.querySelector('input[name="format"]:checked')?.value;
+
+  const style =
+    document.getElementById("style").value;
+
+  const status =
+    document.getElementById("status");
+
+const selectedSong = document.getElementById("preview-song").files[0];
+  const selectedPhotos = Array.from(document.getElementById("photos").files);
+  const startTime = Number(document.getElementById("clip-start").value);
+const endTime = Number(document.getElementById("clip-end").value);
+const highlightChoice = document.querySelector('input[name="highlight"]:checked')?.value || "auto";
+ if (!selectedSong) {
+    status.style.display = "block";
+    status.textContent = "Please choose your song in Preview & Choose Your Song Section first.";
+    return;
+}
+
+if (startTime < 0 || endTime <= startTime) {
+    status.style.display = "block";
+    status.textContent = "Please choose valid start and end times for your song.";
+    return;
+}
+ status.style.display = "block";
+status.textContent = "Sending your settings to Cloudflare...";
+  const settingsPayload = {
+    length: length,
+    platform: platform || "",
+    format: format,
+    style: style,
+    highlightChoice: highlightChoice,
+    songName: selectedSong.name,
+    startTime: startTime,
+    endTime: endTime
+};
+
+fetch("https://words-that-needed-out-api.wordsthatneededout.workers.dev/settings", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(settingsPayload)
+})
+.then(async response => {
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(result.error || "Settings connection failed.");
+    }
+      const falResponse = await fetch(
+        "https://words-that-needed-out-api.wordsthatneededout.workers.dev/fal-check"
+      );
+      const falCheck = await falResponse.json();
+
+      if (!falResponse.ok) {
+        throw new Error(falCheck.message || "FAL check failed.");
+      }
+         status.innerHTML =
+        "<strong>Connected to Cloudflare!</strong><br>" +
+        "Studio settings received and validated.<br>" +
+        "FAL connection: " + falCheck.message + "<br>" +
+        "No video was generated.";
+})
+.catch(error => {
+    status.innerHTML =
+        "<strong>Connection error:</strong><br>" + error.message;
+});
+  
+}
+  
+const songInput = document.getElementById("preview-song");
+const songAudio = document.getElementById("song-audio");
+const songFileName = document.getElementById("song-file-name");
+const manualSelection = document.getElementById("manual-selection");
+const clipStart = document.getElementById("clip-start");
+const clipEnd = document.getElementById("clip-end");
+const clipDuration = document.getElementById("clip-duration");
+const previewClip = document.getElementById("preview-clip");
+const selectionStatus = document.getElementById("selection-status");
+
+let songUrl = null;
+let clipPreviewEnd = null;
+  let waveformData = null;
+
+async function analyzeSongWaveform(file) {
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const arrayBuffer = await file.arrayBuffer();
+    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+    const channelData = audioBuffer.getChannelData(0);
+    const samplesPerBar = Math.floor(channelData.length / 120);
+    const levels = [];
+
+    for (let i = 0; i < 120; i++) {
+      const start = i * samplesPerBar;
+      const end = Math.min(start + samplesPerBar, channelData.length);
+      let sum = 0;
+
+      for (let j = start; j < end; j++) {
+        sum += channelData[j] * channelData[j];
+      }
+
+      const rms = Math.sqrt(sum / Math.max(1, end - start));
+      levels.push(rms);
+    }
+
+    waveformData = levels;
+    await audioContext.close();
+    drawSongWaveform();
+  } catch (error) {
+    console.error("Could not analyze song waveform:", error);
+    waveformData = null;
+  }
+}
+  songInput.addEventListener("change", function () {
+  const file = songInput.files[0];
+  if (!file) return;
+
+  if (songUrl) URL.revokeObjectURL(songUrl);
+  songUrl = URL.createObjectURL(file);
+
+  songAudio.src = songUrl;
+  songAudio.style.display = "block";
+  songFileName.textContent = "Selected song: " + file.name;
+analyzeSongWaveform(file);
+
+  songAudio.onloadedmetadata = function () {
+    clipStart.max = Math.floor(songAudio.duration);
+    clipEnd.max = Math.floor(songAudio.duration);
+    clipEnd.value = Math.min(30, Math.floor(songAudio.duration));
+    updateClipDuration();
+    selectionStatus.textContent =
+      "Song loaded. Choose your clip times and preview your selection.";
+  };
+});
+
+function updateClipDuration() {
+  const start = Number(clipStart.value);
+  const end = Number(clipEnd.value);
+  const duration = Math.max(0, end - start);
+  clipDuration.textContent = "Selected clip: " + duration + " seconds";
+}
+
+
+function applyAutomaticSelection() {
+  if (!songAudio.src || !Number.isFinite(songAudio.duration) ||
+      !songAudio.duration || !waveformData) {
+    selectionStatus.textContent =
+      "Please upload your song while automatic selection is enabled.";
+    return;
+  }
+
+  const duration = songAudio.duration;
+  const lengthChoice =
+    document.querySelector('input[name="length"]:checked')?.value;
+
+  const targetLength = lengthChoice === "full"
+    ? duration
+    : Math.min(Number(lengthChoice) || 30, duration);
+
+  let bestStart = 0;
+
+  if (targetLength < duration) {
+    const windowSize = Math.max(
+      1,
+      Math.ceil((targetLength / duration) * waveformData.length)
+    );
+
+    let bestScore = -1;
+
+    for (let i = 0; i <= waveformData.length - windowSize; i++) {
+      const section = waveformData.slice(i, i + windowSize);
+      const score = section.reduce((sum, value) => sum + value, 0)
+        / section.length;
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestStart = i;
+      }
+    }
+
+    bestStart = Math.floor(
+      (bestStart / waveformData.length) * duration
+    );
+  }
+
+  clipStart.value = bestStart;
+  clipEnd.value = Math.min(duration, bestStart + targetLength);
+
+  updateClipDuration();
+  drawSongWaveform();
+
+  selectionStatus.textContent =
+    "Studio selected the strongest audio section. You can change it anytime.";
+}
+
+document.querySelectorAll('input[name="highlight"]').forEach(function(option) {
+  option.addEventListener("change", function() {
+    const manual =
+      document.querySelector('input[name="highlight"]:checked').value === "manual";
+
+    manualSelection.style.display = manual ? "block" : "none";
+
+    if (manual) {
+      selectionStatus.textContent =
+        "Choose your song and set the start and end times.";
+    } else {
+      applyAutomaticSelection();
+    }
+  });
+});
+
+clipStart.addEventListener("input", updateClipDuration);
+clipEnd.addEventListener("input", updateClipDuration);
+
+previewClip.addEventListener("click", function () {
+  const start = Number(clipStart.value);
+  const end = Number(clipEnd.value);
+
+  if (!songAudio.src || !Number.isFinite(songAudio.duration)) {
+    selectionStatus.textContent = "Please choose an audio file first.";
+    return;
+  }
+
+  if (start < 0 || end <= start || end > songAudio.duration) {
+    selectionStatus.textContent =
+      "Please enter valid start and end times within your song.";
+    return;
+  }
+
+  songAudio.currentTime = start;
+  clipPreviewEnd = end;
+  songAudio.play();
+  selectionStatus.textContent =
+    "Previewing your selected section: " + start + "–" + end + " seconds.";
+});
+
+songAudio.addEventListener("timeupdate", function () {
+  if (clipPreviewEnd !== null && songAudio.currentTime >= clipPreviewEnd) {
+    songAudio.pause();
+    clipPreviewEnd = null;
+  }
+});
+
+document.getElementById("play-selected-clip").addEventListener("click", function () {
+    previewClip.click();
+});
+
+document.getElementById("play-full-song").addEventListener("click", function () {
+    if (!songAudio.src || !Number.isFinite(songAudio.duration)) {
+        selectionStatus.textContent = "Please choose an audio file first.";
+        return;
+    }
+
+    clipPreviewEnd = null;
+    songAudio.pause();
+    songAudio.currentTime = 0;
+    songAudio.play();
+
+    selectionStatus.textContent = "Playing the full song.";
+});
+
+  
+const waveformCanvas = document.getElementById("song-waveform");
+const waveformPanel = document.getElementById("waveform-panel");
+const waveStartLabel = document.getElementById("wave-start-label");
+const waveEndLabel = document.getElementById("wave-end-label");
+const waveSelectionLabel = document.getElementById("wave-selection-label");
+
+function drawSongWaveform() {
+  if (!waveformCanvas || !songAudio || !Number.isFinite(songAudio.duration)) {
+    return;
+  }
+
+  const canvas = waveformCanvas;
+  const ctx = canvas.getContext("2d");
+  const width = canvas.width;
+  const height = canvas.height;
+  const duration = songAudio.duration;
+  const start = Math.max(0, Math.min(Number(clipStart.value) || 0, duration));
+  const end = Math.max(start, Math.min(Number(clipEnd.value) || 0, duration));
+
+  ctx.clearRect(0, 0, width, height);
+
+  const middle = height / 2;
+  const barCount = 120;
+  const gap = 2;
+  const barWidth = (width - gap * (barCount - 1)) / barCount;
+
+  for (let i = 0; i < barCount; i++) {
+    const x = i * (barWidth + gap);
+    const time = (i / barCount) * duration;
+    const selected = time >= start && time <= end;
+  
+    const waveHeight = waveformData && waveformData.length ? 8 + (waveformData[i] / Math.max(...waveformData, 0.001)) * (height * 0.42) : 8 + Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.37)) * (height * 0.42);
+    ctx.fillStyle = selected ? "#d8b99b" : "#59616e";
+    ctx.fillRect(x, middle - waveHeight / 2, barWidth, waveHeight);
+  }
+
+  // Draw time markings along the bottom of the waveform
+  const timeMarkInterval = duration <= 180 ? 15 : 30;
+  ctx.font = "10px Arial";
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#d8b99b";
+  ctx.strokeStyle = "#d8b99b";
+
+  for (let markSeconds = 0; markSeconds <= duration; markSeconds += timeMarkInterval) {
+    const markX = (markSeconds / duration) * width;
+    const markMinutes = Math.floor(markSeconds / 60);
+    const markRemainder = Math.floor(markSeconds % 60);
+    const markText = markMinutes + ":" + String(markRemainder).padStart(2, "0");
+
+    ctx.beginPath();
+    ctx.moveTo(markX, height - 20);
+    ctx.lineTo(markX, height - 14);
+    ctx.stroke();
+
+    const labelX = Math.max(16, Math.min(width - 16, markX));
+    ctx.fillText(markText, labelX, height - 3);
+  }
+
+  waveStartLabel.textContent = "Start: " + start.toFixed(1) + "s";
+  waveEndLabel.textContent = "End: " + end.toFixed(1) + "s";
+  waveSelectionLabel.textContent =
+    "Selected section: " + start.toFixed(1) + "s – " + end.toFixed(1) + "s";
+}
+
+if (waveformCanvas && waveformPanel) {
+  songInput.addEventListener("change", function () {
+    waveformPanel.style.display = "block";
+  });
+
+  songAudio.addEventListener("loadedmetadata", drawSongWaveform);
+  clipStart.addEventListener("input", drawSongWaveform);
+  clipEnd.addEventListener("input", drawSongWaveform);
+
+  waveformCanvas.addEventListener("click", function (event) {
+    if (!Number.isFinite(songAudio.duration) || !songAudio.duration) return;
+
+    const rect = waveformCanvas.getBoundingClientRect();
+    const position = (event.clientX - rect.left) / rect.width;
+    const clickedTime = Math.max(0, Math.min(position, 1)) * songAudio.duration;
+
+    if (clickedTime < Number(clipStart.value)) {
+      clipStart.value = Math.floor(clickedTime);
+    } else {
+      clipEnd.value = Math.max(
+        Number(clipStart.value) + 1,
+        Math.floor(clickedTime)
+      );
+      clipEnd.value = Math.min(Number(clipEnd.value), Math.floor(songAudio.duration));
+    }
+
+    drawSongWaveform();
+  });
+}
+
+
+// TEMPORARY STUDIO-TO-CLOUDFLARE CONNECTION TEST
+(async function () {
+    const testBox = document.createElement("div");
+
+    testBox.style.padding = "12px";
+    testBox.style.margin = "15px";
+    testBox.style.background = "#382319";
+    testBox.style.color = "#F2D58A";
+    testBox.style.border = "1px solid #D99A35";
+    testBox.style.borderRadius = "8px";
+    testBox.textContent = "Checking Cloudflare connection...";
+
+    document.body.appendChild(testBox);
+
+    try {
+        const response = await fetch(
+            "https://words-that-needed-out-api.wordsthatneededout.workers.dev/health"
+        );
+
+        if (!response.ok) {
+            throw new Error("Worker returned status " + response.status);
+        }
+
+        const result = await response.json();
+
+        if (result.status === "ok") {
+            testBox.textContent =
+                "CONNECTED: Words That Needed Out Studio can reach Cloudflare!";
+        } else {
+            testBox.textContent =
+                "Connection reached, but the health check needs attention.";
+        }
+    } catch (error) {
+        testBox.textContent =
+            "Connection test failed: " + error.message;
+
+        console.error("Cloudflare connection test:", error);
+    }
+})();
+
+</script>
+</body>
+</html>
