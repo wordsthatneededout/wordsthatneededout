@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Words That Needed Out Studio</title>
+<style>
+:root {
+  --midnight:#171311; --espresso:#382319; --gold:#D99A27;
+  --amber:#F4B94F; --ivory:#F5E8C8; --copper:#B85F42;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--midnight) url("https://raw.githubusercontent.com/wordsthatneededout/wordsthatneededout/main/Sunset%20Lantern%20by%20the%20Lakeside.png") center top/cover fixed no-repeat;color:var(--ivory);font-family:Georgia,serif;position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(15,10,9,.40),rgba(15,10,9,.62) 42%,rgba(15,10,9,.72))}
+.topbar{position:relative;z-index:2;background:rgba(18,13,12,.94);border-bottom:1px solid var(--gold);display:flex;justify-content:center;gap:clamp(10px,3vw,34px);flex-wrap:wrap;padding:15px}
+.topbar a{color:var(--ivory);text-decoration:none;font-size:15px;padding:5px}
+.topbar a:hover{color:var(--amber)}
+.hero{min-height:390px;position:relative;display:grid;grid-template-columns:minmax(150px,31%) 1fr;align-items:center;gap:25px;padding:30px clamp(18px,5vw,70px);background:
+linear-gradient(90deg,rgba(15,10,9,.3),rgba(15,10,9,.52)),
+url("https://raw.githubusercontent.com/wordsthatneededout/wordsthatneededout/main/Sunset%20Lantern%20by%20the%20Lakeside.png") center 48%/cover no-repeat;
+border-bottom:2px solid var(--gold);box-shadow:inset 0 -55px 65px rgba(15,10,9,.55)}
+.logo{width:min(100%,280px);aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 5px 18px #000)}
+.hero-copy{text-align:center;text-shadow:0 2px 8px #160b08}
+.hero-copy h1{font-size:clamp(34px,5vw,68px);font-weight:500;font-style:italic;color:var(--ivory);margin:0 0 8px}
+.hero-copy .script{font-size:clamp(28px,4.5vw,58px);font-style:italic;color:var(--amber);margin:0 0 12px}
+.hero-copy p{font-size:clamp(15px,1.8vw,21px);line-height:1.5;max-width:720px;margin:0 auto}
+main{max-width:1180px;margin:30px auto 50px;padding:0 18px;position:relative;z-index:0}
+.panel{background:linear-gradient(145deg,rgba(56,35,25,.82),rgba(25,17,14,.86));backdrop-filter:blur(3px);border:1px solid var(--gold);border-radius:17px;padding:clamp(17px,3vw,30px);margin:20px 0;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.panel-title{text-align:center;color:var(--ivory);font-size:clamp(23px,3vw,34px);font-weight:normal;font-style:italic;margin:0 0 22px}
+.step{display:grid;grid-template-columns:55px minmax(0,1fr);gap:15px;align-items:start;background:rgba(15,10,9,.60);border:1px solid rgba(217,154,39,.72);border-radius:13px;padding:17px;margin:15px 0}
+.step-num{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#ffd77b,#d98516);color:#24150b;font-size:25px;font-weight:bold;border:2px solid #ffe0a0;box-shadow:0 0 12px rgba(244,185,79,.4)}
+.step h2{margin:0 0 6px;color:var(--ivory);font-size:22px}
+.step p{margin:0 0 12px;color:#ddc9a7;line-height:1.45}
+input[type=file],select,input[type=number]{width:100%;padding:12px;background:#1b1411;color:var(--ivory);border:1px solid #a96e2a;border-radius:8px;margin:8px 0 12px}
+input[type=radio]{accent-color:var(--amber)}
+.choice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
+.choice{display:block;text-align:center;background:#1b1411;border:1px solid #9a6327;border-radius:10px;padding:14px;cursor:pointer;transition:.18s}
+.choice:hover,.choice.selected{border-color:var(--amber);background:#49301b;box-shadow:0 0 12px rgba(244,185,79,.2)}
+.choice-title{font-weight:bold;color:var(--ivory);margin-bottom:4px}
+.choice-description{font-size:12px;color:#d8bd91}
+.choice input{margin-right:5px}
+.inline-options{display:flex;gap:18px;flex-wrap:wrap;margin:8px 0 14px}
+.inline-options label{display:flex;align-items:center;gap:7px}
+button{cursor:pointer}
+.action{background:linear-gradient(#f7bd4b,#b85f12);border:1px solid #ffdc8c;color:#20130c;border-radius:9px;padding:12px 20px;font-weight:bold;font-family:Georgia,serif}
+.action:hover{filter:brightness(1.12)}
+.action.secondary{background:#302018;color:var(--ivory);border-color:var(--gold)}
+.audio-wrap{background:#17110f;border:1px solid #89551f;border-radius:10px;padding:14px;margin-top:12px}
+audio{width:100%;margin-top:8px}
+#waveform-panel{margin-top:16px;padding:14px;background:#1b1411;border:1px solid #9b6a2c;border-radius:12px}
+#song-waveform{width:100%;height:120px;display:block;cursor:crosshair}
+.wave-labels{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--amber)}
+#manual-selection{margin-top:14px;padding:14px;background:#201611;border-radius:10px}
+.create-area{text-align:center;padding:25px 10px}
+.create-button{font-size:clamp(22px,3vw,30px);padding:18px 42px;min-width:min(100%,430px);border-radius:14px;box-shadow:0 0 24px rgba(217,154,39,.35)}
+.status{display:none;margin:18px auto 0;padding:14px;border-radius:9px;background:#211710;border:1px solid var(--gold);max-width:700px;line-height:1.5}
+.private-note{text-align:center;color:#d1b98e;margin:25px 0}
+.about-section{background:linear-gradient(145deg,rgba(56,35,25,.88),rgba(25,17,14,.91));border:1px solid var(--gold);border-radius:17px;padding:clamp(22px,4vw,38px);margin:34px 0 42px;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.about-section h2{text-align:center;color:var(--amber);font-size:clamp(25px,3vw,34px);font-weight:normal;font-style:italic;margin:0 0 22px}
+.about-section h3{color:var(--ivory);font-size:21px;margin:24px 0 8px}
+.about-section p{color:#ead9bb;line-height:1.75;font-size:16px;margin:0 0 14px}
+footer{text-align:center;padding:42px 15px;border-top:2px solid var(--gold);color:#e6c88f;background:linear-gradient(180deg,rgba(19,14,12,.72),rgba(19,14,12,.88)),url("https://raw.githubusercontent.com/wordsthatneededout/wordsthatneededout/main/Sunset%20Lantern%20by%20the%20Lakeside.png") center 72%/cover no-repeat}
+.footer-script{font-size:30px;font-style:italic;color:var(--amber);margin-bottom:8px}
+@media(max-width:700px){.hero{grid-template-columns:1fr;text-align:center;padding:22px 16px}.logo{width:155px;margin:auto}.hero-copy h1{font-size:34px}.step{grid-template-columns:42px minmax(0,1fr);gap:10px;padding:13px}.step-num{width:38px;height:38px;font-size:21px}.step h2{font-size:19px}.topbar{gap:8px}.topbar a{font-size:13px}}
+</style>
+</head>
+<body>
+<nav class="topbar" aria-label="Main navigation">
+<a href="#home">⌂ Home</a><a href="#create">♫ Create Video</a><a href="#projects">▱ My Projects</a><a href="#archive">▤ Song Archive</a><a href="About_the_Studio_and_Its_Creator_Test.html">ⓘ About</a><a href="#community">♡ Community</a>
+</nav>
+<header class="hero" id="home">
+<img class="logo" src="https://raw.githubusercontent.com/wordsthatneededout/wordsthatneededout/main/ChatGPT%20Image%20Nov%2011%2C%202026%2C%2004_04_29%20PM.png" alt="Words That Needed Out Studio circular logo">
+<div class="hero-copy">
+<div class="script">Tragedy to Triumph ♡</div>
+<h1>Words That Needed Out Studio</h1>
+<p>Turn your words, your pain, your stories, and your healing into powerful music videos and lasting memories.</p>
+</div>
+</header>
+<main id="create">
+<section class="panel">
+<h2 class="panel-title">♡ Create Your Music Video ♡</h2>
+<div class="step">
+<div class="step-num">1</div><div><h2>Choose Your Song</h2><p>Upload the audio you want to use for your video.</p>
+<label for="preview-song">Upload your song</label><input type="file" id="preview-song" accept="audio/*">
+<div class="audio-wrap"><p id="song-file-name">No song selected yet.</p><audio id="song-audio" controls style="display:none"></audio></div>
+</div></div>
+<div class="step">
+<div class="step-num">2</div><div><h2>Choose Your Song Section</h2><p>Let Studio suggest a highlight, or choose your own start and end time.</p>
+<div class="inline-options">
+<label><input type="radio" name="highlight" value="auto" checked> Let Studio find the best part</label>
+<label><input type="radio" name="highlight" value="manual"> Let me choose</label>
+</div>
+<div id="waveform-panel" style="display:none">
+<h3>♫ Your Song Timeline</h3><p style="font-size:14px;color:#d8b99b">Your selected section will be highlighted below. Tap the waveform to adjust it.</p>
+<canvas id="song-waveform" width="900" height="120"></canvas>
+<div class="wave-labels"><span id="wave-start-label">0:00</span><span id="wave-selection-label">Selected section</span><span id="wave-end-label">Song end</span></div>
+</div>
+<div style="margin-top:12px"><button type="button" class="action secondary" id="play-selected-clip">▶ Play Selected Clip</button> <button type="button" class="action secondary" id="play-full-song">▶ Play Full Song</button></div>
+<div id="manual-selection" style="display:none">
+<label for="clip-start">Start time (seconds)</label><input type="number" id="clip-start" min="0" value="0" step="1">
+<label for="clip-end">End time (seconds)</label><input type="number" id="clip-end" min="1" value="30" step="1">
+<p id="clip-duration">Selected clip: 30 seconds</p>
+<button type="button" class="action secondary" id="preview-clip">Preview Selected Section</button>
+</div>
+<p id="selection-status" aria-live="polite">Upload a song to begin.</p>
+</div></div>
+<div class="step"><div class="step-num">3</div><div><h2>Where Will You Share It?</h2><p>Pick the platform you plan to post your video on.</p>
+<div class="choice-grid">
+<label class="choice"><input type="radio" name="platform" value="tiktok"><div class="choice-title">TikTok</div><div class="choice-description">Vertical video</div></label>
+<label class="choice"><input type="radio" name="platform" value="youtube"><div class="choice-title">YouTube</div><div class="choice-description">Full-size video</div></label>
+<label class="choice"><input type="radio" name="platform" value="shorts"><div class="choice-title">YouTube Shorts</div><div class="choice-description">Vertical short</div></label>
+<label class="choice"><input type="radio" name="platform" value="facebook"><div class="choice-title">Facebook Reels</div><div class="choice-description">Vertical reel</div></label>
+</div></div></div>
+<div class="step"><div class="step-num">4</div><div><h2>Choose Your Video Size</h2><p>Select the format that fits your platform best.</p>
+<div class="choice-grid">
+<label class="choice selected"><input type="radio" name="format" value="vertical" checked><div class="choice-title">9:16 Vertical</div><div class="choice-description">TikTok · Reels · Shorts</div></label>
+<label class="choice"><input type="radio" name="format" value="square"><div class="choice-title">1:1 Square</div><div class="choice-description">Posts · Social</div></label>
+<label class="choice"><input type="radio" name="format" value="landscape"><div class="choice-title">16:9 Landscape</div><div class="choice-description">YouTube · Full video</div></label>
+</div></div></div>
+<div class="step"><div class="step-num">5</div><div><h2>Choose Video Length</h2><p>Pick how much of your song to use.</p>
+<div class="choice-grid">
+<label class="choice"><input type="radio" name="length" value="30"><div class="choice-title">30 Seconds</div></label>
+<label class="choice"><input type="radio" name="length" value="60"><div class="choice-title">60 Seconds</div></label>
+<label class="choice"><input type="radio" name="length" value="90"><div class="choice-title">90 Seconds</div></label>
+<label class="choice selected"><input type="radio" name="length" value="full" checked><div class="choice-title">Full Song</div></label>
+</div></div></div>
+<div class="step"><div class="step-num">6</div><div><h2>Choose Your Video Style</h2><p>Select the look and feel for your music video.</p>
+<div class="choice-grid">
+<label class="choice selected"><input type="radio" name="style" value="ai" checked><div class="choice-title">🌅 AI Music Video</div><div class="choice-description">Cinematic AI scenes</div></label>
+<label class="choice"><input type="radio" name="style" value="photos"><div class="choice-title">▣ Photo-Based Video</div><div class="choice-description">Your own pictures</div></label>
+<label class="choice"><input type="radio" name="style" value="lyrics"><div class="choice-title">Lyrics Video</div><div class="choice-description">Words on screen</div></label>
+<label class="choice"><input type="radio" name="style" value="mixed"><div class="choice-title">Photos + AI Scenes</div><div class="choice-description">A blend of both</div></label>
+</div>
+<input type="hidden" id="style" value="ai">
+</div></div>
+<div class="step"><div class="step-num">7</div><div><h2>Add Photos (Optional)</h2><p>Include personal photos for a more meaningful video.</p><label for="photos">Upload photos</label><input type="file" id="photos" accept="image/*" multiple></div></div>
+<div class="create-area">
+<button class="action create-button" onclick="createVideo()">▣ CREATE VIDEO</button>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+</div>
+</section>
+
+</main>
+<footer id="projects"><div class="footer-script">Tragedy to Triumph ♡</div><div>REAL STORIES　♥　REAL EMOTIONS　♥　REAL HEALING　♥　REAL SONGS</div><p id="archive">© 2026 Words That Needed Out Studio</p><span id="community"></span></footer>
+<script>
+const choices = document.querySelectorAll(".choice");
+choices.forEach(choice => {
+  choice.addEventListener("click", () => {
+    const input = choice.querySelector("input");
+    if (!input) return;
+    const group = input.name;
+    document.querySelectorAll('input[name="' + group + '"]').forEach(item => {
+      const card = item.closest(".choice");
+      if (card) card.classList.remove("selected");
+    });
+    choice.classList.add("selected");
+    input.checked = true;
+    if (group === "style") document.getElementById("style").value = input.value;
+    if (group === "length" && document.querySelector('input[name="highlight"]:checked')?.value === "auto") applyAutomaticSelection();
+  });
+});
+function createVideo() {
+  const length = document.querySelector('input[name="length"]:checked')?.value;
+  const platform = document.querySelector('input[name="platform"]:checked')?.value;
+  const format = document.querySelector('input[name="format"]:checked')?.value;
+  const style = document.querySelector('input[name="style"]:checked')?.value || document.getElementById("style").value;
+  const status = document.getElementById("status");
+  const selectedSong = document.getElementById("preview-song").files[0];
+  const selectedPhotos = Array.from(document.getElementById("photos").files);
+  const startTime = Number(document.getElementById("clip-start").value);
+  const endTime = Number(document.getElementById("clip-end").value);
+  const highlightChoice = document.querySelector('input[name="highlight"]:checked')?.value || "auto";
+  if (!selectedSong) { status.style.display="block"; status.textContent="Please upload your song first."; return; }
+  if (startTime < 0 || endTime <= startTime) { status.style.display="block"; status.textContent="Please choose valid start and end times for your song."; return; }
+  status.style.display="block";
+  status.textContent="Sending your settings to Cloudflare...";
+  const settingsPayload = {length,platform:platform||"",format,style,highlightChoice,songName:selectedSong.name,startTime,endTime,photoCount:selectedPhotos.length};
+  fetch("https://words-that-needed-out-api.words-that-needed-out.workers.dev/settings", {
+    method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(settingsPayload)
+  }).then(async response => {
+    const result=await response.json();
+    if(!response.ok) throw new Error(result.error||"Settings connection failed.");
+    const falResponse=await fetch("https://words-that-needed-out-api.words-that-needed-out.workers.dev/fal-check");
+    const falCheck=await falResponse.json();
+    if(!falResponse.ok) throw new Error(falCheck.message||"FAL check failed.");
+    status.innerHTML="<strong>Connected to Cloudflare!</strong><br>Studio settings received and validated.<br>FAL connection: "+falCheck.message+"<br>No video was generated.";
+  }).catch(error => {status.innerHTML="<strong>Connection error:</strong><br>"+error.message;});
+}
+const songInput=document.getElementById("preview-song");
+const songAudio=document.getElementById("song-audio");
+const songFileName=document.getElementById("song-file-name");
+const manualSelection=document.getElementById("manual-selection");
+const clipStart=document.getElementById("clip-start");
+const clipEnd=document.getElementById("clip-end");
+const clipDuration=document.getElementById("clip-duration");
+const previewClip=document.getElementById("preview-clip");
+const selectionStatus=document.getElementById("selection-status");
+let songUrl=null,clipPreviewEnd=null,waveformData=null;
+async function analyzeSongWaveform(file) {
+  try {
+    const audioContext=new (window.AudioContext||window.webkitAudioContext)();
+    const arrayBuffer=await file.arrayBuffer();
+    const audioBuffer=await audioContext.decodeAudioData(arrayBuffer);
+    const channelData=audioBuffer.getChannelData(0);
+    const samplesPerBar=Math.floor(channelData.length/120);
+    const levels=[];
+    for(let i=0;i<120;i++){
+      const start=i*samplesPerBar,end=Math.min(start+samplesPerBar,channelData.length);
+      let sum=0;for(let j=start;j<end;j++)sum+=channelData[j]*channelData[j];
+      levels.push(Math.sqrt(sum/Math.max(1,end-start)));
+    }
+    waveformData=levels;await audioContext.close();drawSongWaveform();if(document.querySelector('input[name="highlight"]:checked')?.value==="auto")applyAutomaticSelection();
+  } catch(error){console.error("Could not analyze song waveform:",error);waveformData=null;}
+}
+songInput.addEventListener("change",function(){
+  const file=songInput.files[0];if(!file)return;
+  if(songUrl)URL.revokeObjectURL(songUrl);
+  songUrl=URL.createObjectURL(file);songAudio.src=songUrl;songAudio.style.display="block";
+  songFileName.textContent="Selected song: "+file.name;
+  analyzeSongWaveform(file);
+  songAudio.onloadedmetadata=function(){
+    clipStart.max=Math.floor(songAudio.duration);clipEnd.max=Math.floor(songAudio.duration);
+    clipEnd.value=Math.min(30,Math.floor(songAudio.duration));updateClipDuration();
+    selectionStatus.textContent="Song loaded. Choose your clip times and preview your selection.";
+    if(document.querySelector('input[name="highlight"]:checked')?.value==="auto")applyAutomaticSelection();
+  };
+  document.getElementById("waveform-panel").style.display="block";
+});
+function updateClipDuration(){
+  const start=Number(clipStart.value),end=Number(clipEnd.value);
+  clipDuration.textContent="Selected clip: "+Math.max(0,end-start)+" seconds";
+  drawSongWaveform();
+}
+function applyAutomaticSelection(){
+  if(!songAudio.src||!Number.isFinite(songAudio.duration)||!songAudio.duration||!waveformData)return;
+  const duration=songAudio.duration;
+  const lengthChoice=document.querySelector('input[name="length"]:checked')?.value;
+  const targetLength=lengthChoice==="full"?duration:Math.min(Number(lengthChoice)||30,duration);
+  let bestStart=0;
+  if(targetLength<duration){
+    const windowSize=Math.max(1,Math.ceil((targetLength/duration)*waveformData.length));
+    let bestScore=-1;
+    for(let i=0;i<=waveformData.length-windowSize;i++){
+      const section=waveformData.slice(i,i+windowSize);
+      const score=section.reduce((sum,value)=>sum+value,0)/section.length;
+      if(score>bestScore){bestScore=score;bestStart=i;}
+    }
+    bestStart=Math.floor((bestStart/waveformData.length)*duration);
+  }
+  clipStart.value=bestStart;clipEnd.value=Math.min(duration,bestStart+targetLength);
+  updateClipDuration();selectionStatus.textContent="Studio selected the strongest audio section. You can change it anytime.";
+}
+document.querySelectorAll('input[name="highlight"]').forEach(option=>{
+  option.addEventListener("change",function(){
+    const manual=document.querySelector('input[name="highlight"]:checked').value==="manual";
+    manualSelection.style.display=manual?"block":"none";
+    if(manual)selectionStatus.textContent="Choose your song and set the start and end times.";
+    else applyAutomaticSelection();
+  });
+});
+clipStart.addEventListener("input",updateClipDuration);
+clipEnd.addEventListener("input",updateClipDuration);
+previewClip.addEventListener("click",function(){
+  const start=Number(clipStart.value),end=Number(clipEnd.value);
+  if(!songAudio.src||!Number.isFinite(songAudio.duration)){selectionStatus.textContent="Please choose an audio file first.";return;}
+  if(start<0||end<=start||end>songAudio.duration){selectionStatus.textContent="Please enter valid start and end times within your song.";return;}
+  songAudio.currentTime=start;clipPreviewEnd=end;songAudio.play();
+  selectionStatus.textContent="Previewing your selected section: "+start+"–"+end+" seconds.";
+});
+songAudio.addEventListener("timeupdate",function(){
+  if(clipPreviewEnd!==null&&songAudio.currentTime>=clipPreviewEnd){songAudio.pause();clipPreviewEnd=null;}
+});
+document.getElementById("play-selected-clip").addEventListener("click",()=>previewClip.click());
+document.getElementById("play-full-song").addEventListener("click",function(){
+  if(!songAudio.src||!Number.isFinite(songAudio.duration)){selectionStatus.textContent="Please choose an audio file first.";return;}
+  clipPreviewEnd=null;songAudio.pause();songAudio.currentTime=0;songAudio.play();selectionStatus.textContent="Playing the full song.";
+});
+const waveformCanvas=document.getElementById("song-waveform");
+const waveStartLabel=document.getElementById("wave-start-label");
+const waveEndLabel=document.getElementById("wave-end-label");
+const waveSelectionLabel=document.getElementById("wave-selection-label");
+function drawSongWaveform(){
+  if(!waveformCanvas||!songAudio||!Number.isFinite(songAudio.duration)||!songAudio.duration)return;
+  const ctx=waveformCanvas.getContext("2d"),width=waveformCanvas.width,height=waveformCanvas.height,duration=songAudio.duration;
+  const start=Math.max(0,Math.min(Number(clipStart.value)||0,duration));
+  const end=Math.max(start,Math.min(Number(clipEnd.value)||0,duration));
+  ctx.clearRect(0,0,width,height);const middle=height/2,barCount=120,gap=2,barWidth=(width-gap*(barCount-1))/barCount;
+  const maxLevel=waveformData&&waveformData.length?Math.max(...waveformData,0.001):1;
+  for(let i=0;i<barCount;i++){
+    const x=i*(barWidth+gap),time=(i/barCount)*duration,selected=time>=start&&time<=end;
+    const waveHeight=waveformData&&waveformData.length?8+(waveformData[i]/maxLevel)*(height*.42):8+Math.abs(Math.sin(i*1.7)*Math.cos(i*.37))*(height*.42);
+    ctx.fillStyle=selected?"#F4B94F":"#785b43";ctx.fillRect(x,middle-waveHeight/2,barWidth,waveHeight);
+  }
+  const interval=duration<=180?15:30;ctx.font="10px Arial";ctx.textAlign="center";ctx.fillStyle="#F4B94F";ctx.strokeStyle="#F4B94F";
+  for(let seconds=0;seconds<=duration;seconds+=interval){
+    const x=(seconds/duration)*width,mins=Math.floor(seconds/60),secs=Math.floor(seconds%60);
+    ctx.beginPath();ctx.moveTo(x,height-20);ctx.lineTo(x,height-14);ctx.stroke();
+    ctx.fillText(mins+":"+String(secs).padStart(2,"0"),Math.max(16,Math.min(width-16,x)),height-3);
+  }
+  waveStartLabel.textContent="Start: "+start.toFixed(1)+"s";
+  waveEndLabel.textContent="End: "+end.toFixed(1)+"s";
+  waveSelectionLabel.textContent="Selected: "+start.toFixed(1)+"s – "+end.toFixed(1)+"s";
+}
+songAudio.addEventListener("loadedmetadata",drawSongWaveform);
+waveformCanvas.addEventListener("click",function(event){
+  if(!Number.isFinite(songAudio.duration)||!songAudio.duration)return;
+  const rect=waveformCanvas.getBoundingClientRect(),position=(event.clientX-rect.left)/rect.width;
+  const clickedTime=Math.max(0,Math.min(position,1))*songAudio.duration;
+  if(clickedTime<Number(clipStart.value))clipStart.value=Math.floor(clickedTime);
+  else clipEnd.value=Math.min(Math.floor(songAudio.duration),Math.max(Number(clipStart.value)+1,Math.floor(clickedTime)));
+  updateClipDuration();
+});
+;
+</script>
+</body>
+</html>
