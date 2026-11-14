@@ -176,12 +176,12 @@ function createVideo() {
   status.style.display="block";
   status.textContent="Sending your settings to Cloudflare...";
   const settingsPayload = {length,platform:platform||"",format,style,highlightChoice,songName:selectedSong.name,startTime,endTime,photoCount:selectedPhotos.length};
-  fetch("https://words-that-needed-out-api.words-that-needed-out.workers.dev/settings", {
+  fetch("https://words-that-needed-out-api.wordsthatneededout.workers.dev/settings", {
     method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(settingsPayload)
   }).then(async response => {
     const result=await response.json();
     if(!response.ok) throw new Error(result.error||"Settings connection failed.");
-    const falResponse=await fetch("https://words-that-needed-out-api.words-that-needed-out.workers.dev/fal-check");
+    const falResponse=await fetch("https://words-that-needed-out-api.wordsthatneededout.workers.dev/fal-check");
     const falCheck=await falResponse.json();
     if(!falResponse.ok) throw new Error(falCheck.message||"FAL check failed.");
     status.innerHTML="<strong>Connected to Cloudflare!</strong><br>Studio settings received and validated.<br>FAL connection: "+falCheck.message+"<br>No video was generated.";
