@@ -160,32 +160,75 @@ choices.forEach(choice => {
     if (group === "length" && document.querySelector('input[name="highlight"]:checked')?.value === "auto") applyAutomaticSelection();
   });
 });
-function createVideo() {
-  const length = document.querySelector('input[name="length"]:checked')?.value;
-  const platform = document.querySelector('input[name="platform"]:checked')?.value;
-  const format = document.querySelector('input[name="format"]:checked')?.value;
-  const style = document.querySelector('input[name="style"]:checked')?.value || document.getElementById("style").value;
+const WORKER = "https://words-that-needed-out-api.wordsthatneededout.workers.dev";
+const MODEL = "minimax/h3-max-turbo/text-to-video";
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function api(path, options) {
+  const res = await fetch(WORKER + path, options);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || data.detail || "Request failed");
+  return data;
+}
+
+async function makeScene(prompt, seconds, resolution, aspect, onUpdate) {
+  const job = await api("/fal/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: MODEL,
+      input: {
+        prompt,
+        duration: seconds,
+        resolution,
+        aspect_ratio: aspect,
+        prompt_expansion_mode: "disabled"
+      }
+    })
+  });
+  const id = job.request_id;
+  if (!id) throw new Error("FAL did not return a request ID.");
+  const q = "?model=" + encodeURIComponent(MODEL) + "&request_id=" + encodeURIComponent(id);
+
+  for (let i = 0; i < 120; i++) {
+    await sleep(5000);
+    const s = await api("/fal/status" + q);
+    onUpdate(s.status);
+    if (s.status === "COMPLETED") {
+      const r = await api("/fal/result" + q);
+      return r.video.url;
+    }
+    if (s.status === "FAILED") throw new Error("FAL could not generate this scene.");
+  }
+  throw new Error("Timed out waiting for FAL.");
+}
+
+async function createVideo() {
   const status = document.getElementById("status");
+  const style = document.querySelector('input[name="style"]:checked')?.value || document.getElementById("style").value;
   const selectedSong = document.getElementById("preview-song").files[0];
-  const selectedPhotos = Array.from(document.getElementById("photos").files);
   const startTime = Number(document.getElementById("clip-start").value);
   const endTime = Number(document.getElementById("clip-end").value);
-  const highlightChoice = document.querySelector('input[name="highlight"]:checked')?.value || "auto";
-  if (!selectedSong) { status.style.display="block"; status.textContent="Please upload your song first."; return; }
-  if (startTime < 0 || endTime <= startTime) { status.style.display="block"; status.textContent="Please choose valid start and end times for your song."; return; }
-  status.style.display="block";
-  status.textContent="Sending your settings to Cloudflare...";
-  const settingsPayload = {length,platform:platform||"",format,style,highlightChoice,songName:selectedSong.name,startTime,endTime,photoCount:selectedPhotos.length};
-  fetch("https://words-that-needed-out-api.wordsthatneededout.workers.dev/settings", {
-    method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(settingsPayload)
-  }).then(async response => {
-    const result=await response.json();
-    if(!response.ok) throw new Error(result.error||"Settings connection failed.");
-    const falResponse=await fetch("https://words-that-needed-out-api.wordsthatneededout.workers.dev/fal-check");
-    const falCheck=await falResponse.json();
-    if(!falResponse.ok) throw new Error(falCheck.message||"FAL check failed.");
-    status.innerHTML="<strong>Connected to Cloudflare!</strong><br>Studio settings received and validated.<br>FAL connection: "+falCheck.message+"<br>No video was generated.";
-  }).catch(error => {status.innerHTML="<strong>Connection error:</strong><br>"+error.message;});
+
+  status.style.display = "block";
+  if (!selectedSong) { status.textContent = "Please upload your song first."; return; }
+  if (startTime < 0 || endTime <= startTime) { status.textContent = "Please choose valid start and end times for your song."; return; }
+
+  // TEST MODE: one 5-second, low-cost scene. Change later.
+  const TEST_MODE = true;
+  const seconds = TEST_MODE ? 5 : 15;
+  const resolution = TEST_MODE ? "480P" : "768P";
+  const aspect = "16:9";
+  const prompt = "Cinematic " + style + " music video scene, emotional, gentle camera movement, sunset light over a quiet lake and pine trees";
+
+  try {
+    status.textContent = "Sending your scene to the studio...";
+    const url = await makeScene(prompt, seconds, resolution, aspect,
+      st => { status.textContent = "Scene status: " + st; });
+    status.innerHTML = '<strong>Scene ready!</strong><br><video controls playsinline style="max-width:100%" src="' + url + '"></video>';
+  } catch (error) {
+    status.innerHTML = "<strong>Error:</strong><br>" + error.message;
+  }
 }
 const songInput=document.getElementById("preview-song");
 const songAudio=document.getElementById("song-audio");
